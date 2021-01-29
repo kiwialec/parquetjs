@@ -23,7 +23,7 @@ async function example() {
   await writer.appendRow({
     name: 'apples',
     price: 2.6,
-    colour: [ 'green', 'red' ],
+    colour: ['green', 'red'],
     stock: [
       { quantity: 10, warehouse: "A" },
       { quantity: 20, warehouse: "B" }
@@ -33,7 +33,7 @@ async function example() {
   await writer.appendRow({
     name: 'oranges',
     price: 2.7,
-    colour: [ 'orange' ],
+    colour: ['orange'],
     stock: {
       quantity: [50, 75],
       warehouse: "X"
@@ -43,7 +43,7 @@ async function example() {
   await writer.appendRow({
     name: 'kiwi',
     price: 4.2,
-    colour: [ 'green', 'brown' ]
+    colour: ['green', 'brown']
   });
 
   await writer.close();
@@ -71,4 +71,3 @@ async function example() {
 }
 
 example();
-

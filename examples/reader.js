@@ -14,4 +14,3 @@ async function example() {
 }
 
 example();
-

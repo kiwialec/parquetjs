@@ -3,12 +3,13 @@ const chai = require('chai');
 const assert = chai.assert;
 const parquet = require('../parquet.js');
 
-describe('ParquetSchema', function() {
-  it('should handle complex nesting', function() {
+describe('ParquetSchema', function () {
+  it('should handle complex nesting', function () {
     var metadata = {
       version: 1,
       schema: [
-        { type: null,
+        {
+          type: null,
           type_length: null,
           repetition_type: null,
           name: 'root',
@@ -57,7 +58,7 @@ describe('ParquetSchema', function() {
           scale: null,
           precision: null,
           field_id: null
-       }, {
+        }, {
           type: null,
           type_length: null,
           repetition_type: 0,
@@ -235,8 +236,8 @@ describe('ParquetSchema', function() {
       }
     };
 
-    const reader = new parquet.ParquetReader(metadata,{});
-    assert.deepEqual(reader.schema.fields,expected);
+    const reader = new parquet.ParquetReader(metadata, {});
+    assert.deepEqual(reader.schema.fields, expected);
   });
 
 });
