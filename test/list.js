@@ -4,7 +4,7 @@ const assert = chai.assert;
 const parquet = require('../parquet.js');
 
 
-/*
+/**
   This test creates a test file that has an annotated LIST wrapper that works with AWS Athena
   Currently the schema (and the input data) needs to follow the specification for an annotated list
 
@@ -22,11 +22,11 @@ const parquet = require('../parquet.js');
     id string,
     `test` array<struct<a:string,b:int>>
   )
-  ROW FORMAT SERDE 
-    'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-  STORED AS INPUTFORMAT 
-    'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-  OUTPUTFORMAT 
+  ROW FORMAT SERDE
+    'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
+  STORED AS INPUTFORMAT
+    'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat'
+  OUTPUTFORMAT
     'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
   LOCATION
     's3://s3bucket/.../list.parquet'
@@ -37,7 +37,7 @@ const parquet = require('../parquet.js');
 
 
 const listSchema = new parquet.ParquetSchema({
-  id: { type: 'UTF8'},
+  id: { type: 'UTF8' },
   test: {
     type: 'LIST',
     fields: {
@@ -46,8 +46,8 @@ const listSchema = new parquet.ParquetSchema({
         fields: {
           element: {
             fields: {
-              a: {type: 'UTF8'},
-              b: {type: 'INT64'}
+              a: { type: 'UTF8' },
+              b: { type: 'INT64' }
             }
           }
         }
@@ -56,40 +56,40 @@ const listSchema = new parquet.ParquetSchema({
   }
 });
 
-describe('list', async function() {
+describe('list', async function () {
   let reader;
   const row1 = {
     id: 'Row1',
-    test: {list: [{element: {a:'test1', b:1n}}, {element: { a: 'test2', b: 2n}}, {element: {a: 'test3', b: 3n}}]}
+    test: { list: [{ element: { a: 'test1', b: 1n } }, { element: { a: 'test2', b: 2n } }, { element: { a: 'test3', b: 3n } }] }
   };
 
   const row2 = {
     id: 'Row2',
-    test: {list: [{element: {a:'test4', b:4n}}]}
+    test: { list: [{ element: { a: 'test4', b: 4n } }] }
   };
 
-  before(async function(){
-    let writer = await parquet.ParquetWriter.openFile(listSchema, 'list.parquet', {pageSize: 100});
+  before(async function () {
+    let writer = await parquet.ParquetWriter.openFile(listSchema, 'list.parquet', { pageSize: 100 });
 
     writer.appendRow(row1);
     writer.appendRow(row2);
-   
+
     await writer.close();
     reader = await parquet.ParquetReader.openFile('list.parquet');
   });
 
-  it('schema is encoded correctly', async function() {
+  it('schema is encoded correctly', async function () {
     const schema = reader.metadata.schema;
     assert.equal(schema.length, 7);
     assert.equal(schema[2].name, 'test');
     assert.equal(schema[2].converted_type, 3);
   });
 
-  it('output matches input', async function() {
+  it('output matches input', async function () {
     const cursor = reader.getCursor();
-    let row =  await cursor.next();
+    let row = await cursor.next();
     assert.deepEqual(row, row1);
-    row =  await cursor.next();
+    row = await cursor.next();
     assert.deepEqual(row, row2);
   });
 });

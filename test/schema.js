@@ -3,9 +3,9 @@ const chai = require('chai');
 const assert = chai.assert;
 const parquet = require('../parquet.js');
 
-describe('ParquetSchema', function() {
+describe('ParquetSchema', function () {
 
-  it('should assign correct defaults in a simple flat schema', function() {
+  it('should assign correct defaults in a simple flat schema', function () {
     var schema = new parquet.ParquetSchema({
       name: { type: 'UTF8' },
       quantity: { type: 'INT64' },
@@ -64,7 +64,7 @@ describe('ParquetSchema', function() {
 
   });
 
-  it('should assign correct defaults in a flat schema with optional fieldList', function() {
+  it('should assign correct defaults in a flat schema with optional fieldList', function () {
     var schema = new parquet.ParquetSchema({
       name: { type: 'UTF8' },
       quantity: { type: 'INT64', optional: true },
@@ -122,7 +122,7 @@ describe('ParquetSchema', function() {
     }
   });
 
-  it('should assign correct defaults in a flat schema with repeated fieldList', function() {
+  it('should assign correct defaults in a flat schema with repeated fieldList', function () {
     var schema = new parquet.ParquetSchema({
       name: { type: 'UTF8' },
       quantity: { type: 'INT64', repeated: true },
@@ -180,7 +180,7 @@ describe('ParquetSchema', function() {
     }
   });
 
-  it('should assign correct defaults in a nested schema without repetition modifiers', function() {
+  it('should assign correct defaults in a nested schema without repetition modifiers', function () {
     var schema = new parquet.ParquetSchema({
       name: { type: 'UTF8' },
       stock: {
@@ -275,7 +275,7 @@ describe('ParquetSchema', function() {
     }
   });
 
-  it('should assign correct defaults in a nested schema with optional fields', function() {
+  it('should assign correct defaults in a nested schema with optional fields', function () {
     var schema = new parquet.ParquetSchema({
       name: { type: 'UTF8' },
       stock: {
@@ -371,7 +371,7 @@ describe('ParquetSchema', function() {
     }
   });
 
-  it('should assign correct defaults in a nested schema with repeated fields', function() {
+  it('should assign correct defaults in a nested schema with repeated fields', function () {
     var schema = new parquet.ParquetSchema({
       name: { type: 'UTF8' },
       stock: {

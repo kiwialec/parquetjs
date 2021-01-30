@@ -1,4 +1,5 @@
 'use strict';
+/* eslint-disable no-console, no-cond-assign */
 const parquet = require('..');
 
 async function example() {
@@ -14,4 +15,3 @@ async function example() {
 }
 
 example();
-
