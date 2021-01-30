@@ -522,9 +522,7 @@ describe('ParquetShredder', function () {
     buffer.columnData['fruit,name'] = {
       dlevels: [0],
       rlevels: [0],
-      values: [
-        Buffer.from([97, 112, 112, 108, 101])
-      ],
+      values: [Buffer.from([97, 112, 112, 108, 101])],
       count: 1
     };
 

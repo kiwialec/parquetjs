@@ -4,7 +4,7 @@ const assert = chai.assert;
 const parquet = require('../parquet.js');
 
 
-/*
+/**
   This test creates a test file that has an annotated LIST wrapper that works with AWS Athena
   Currently the schema (and the input data) needs to follow the specification for an annotated list
 
@@ -22,11 +22,11 @@ const parquet = require('../parquet.js');
     id string,
     `test` array<struct<a:string,b:int>>
   )
-  ROW FORMAT SERDE 
-    'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
-  STORED AS INPUTFORMAT 
-    'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
-  OUTPUTFORMAT 
+  ROW FORMAT SERDE
+    'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'
+  STORED AS INPUTFORMAT
+    'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat'
+  OUTPUTFORMAT
     'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
   LOCATION
     's3://s3bucket/.../list.parquet'

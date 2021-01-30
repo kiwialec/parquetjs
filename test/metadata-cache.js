@@ -1,4 +1,5 @@
 'use strict';
+/* global __dirname */
 const chai = require('chai');
 const assert = chai.assert;
 const path = require('path');
@@ -20,7 +21,7 @@ describe('metadata-cache', function () {
           column.offset_index_length = undefined;
           column.column_index_offset = undefined;
           column.column_index_length = undefined;
-        } catch (e) {}
+        } catch (e) {} //eslint-disable-line no-unused-vars, no-empty
       }
     }
     const metaDataTxt = reader.exportMetadata();

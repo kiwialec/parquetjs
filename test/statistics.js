@@ -26,7 +26,7 @@ const schema = new parquet.ParquetSchema({
 
 
 describe('statistics', async function () {
-  let row, reader;
+  let reader, row;
 
   before(async function () {
     let writer = await parquet.ParquetWriter.openFile(schema, 'fruits-statistics.parquet', { pageSize: 3 });

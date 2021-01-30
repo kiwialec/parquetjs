@@ -3,8 +3,8 @@ const chai = require('chai');
 const assert = chai.assert;
 const parquet = require('../parquet.js');
 
-describe('ParquetSchema', function () {
-  it('should handle complex nesting', function () {
+describe('ParquetSchema', function() {
+  it('should handle complex nesting', function() {
     var metadata = {
       version: 1,
       schema: [
@@ -105,9 +105,7 @@ describe('ParquetSchema', function () {
     const expected = {
       "a": {
         "name": "a",
-        "path": [
-          "a"
-        ],
+        "path": ["a"],
         "repetitionType": "REQUIRED",
         "statistics": undefined,
         "rLevelMax": 0,

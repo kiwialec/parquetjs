@@ -3,6 +3,7 @@
 //
 // DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 //
+/* eslint-disable */
 var Thrift = require('thrift').Thrift;
 
 var ttypes = module.exports = {};

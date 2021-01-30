@@ -1,7 +1,7 @@
 'use strict';
 const chai = require('chai');
 const fs = require('fs');
-const os = require('os');
+//const os = require('os');
 const assert = chai.assert;
 const parquet = require('../parquet.js');
 const parquet_thrift = require('../gen-nodejs/parquet_types');
@@ -32,8 +32,8 @@ function mkTestSchema(opts) {
     colour: { type: 'UTF8', repeated: true, compression: opts.compression },
     meta_json: { type: 'BSON', optional: true, compression: opts.compression },
   });
-};
-
+}
+//eslint-disable-next-line no-unused-vars
 function mkTestRows(opts) {
   let rows = [];
 
@@ -120,7 +120,7 @@ async function writeTestStream(opts) {
 
   var out = new stream.PassThrough()
   let writer = await parquet.ParquetWriter.openStream(schema, out, opts)
-  out.on('data', function (d) {})
+  out.on('data', function (d) {}) //eslint-disable-line no-unused-vars
   out.on('end', function () {})
 
   writer.setMetadata("myuid", "420");
@@ -180,7 +180,7 @@ async function verifyStatistics() {
   assert.equal(colStats.min_value, 'apples');
   assert.equal(colStats.null_count, 0);
   assert.equal(colStats.distinct_count, 4);
-
+  //eslint-disable-next-line no-unused-vars
   column.pages.forEach((d, i) => {
     let header = d.data_page_header || d.data_page_header_v2;
     let pageStats = header.statistics;
@@ -305,9 +305,7 @@ async function readTestFile() {
         date: new Date(TEST_VTIME + 2000 * i),
         finger: Buffer.from("FNORD"),
         inter: { months: 42, days: 23, milliseconds: 777 },
-        stock: [
-          { quantity: [50n, 33n], warehouse: "X" }
-        ],
+        stock: [{ quantity: [50n, 33n], warehouse: "X" }],
         colour: ['orange']
       });
 

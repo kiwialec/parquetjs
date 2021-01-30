@@ -1,4 +1,5 @@
 'use strict';
+/* global __dirname */
 const chai = require('chai');
 const fs = require('fs');
 const assert = chai.assert;
@@ -10,11 +11,12 @@ describe('test-files', function () {
   let csv;
 
   async function readData(file, count) {
-    let records = [],
-      record;
+    let record,
+      records = [];
     let i = 0;
     const reader = await parquet.ParquetReader.openFile(path.join(__dirname, 'test-files', file));
     const cursor = reader.getCursor();
+    //eslint-disable-next-line no-unmodified-loop-condition
     while ((record = await cursor.next()) && (!count || i++ < count)) {
       records.push(record);
     }
@@ -56,6 +58,7 @@ describe('test-files', function () {
     this.timeout(5000);
     let data = await readData('customer.impala.parquet', 100);
     bufferToString(data);
+    //eslint-disable-next-line
     const expected = require(path.join(__dirname, 'test-files', 'customer.impala.json')).map(el => { return { ...el, c_custkey: BigInt(el.c_custkey) } });
 
 
@@ -68,7 +71,7 @@ describe('test-files', function () {
 
   // repeated values
   // it('nation.dict.parquet loads', async function() {
-  //   await check('nation.dict.parquet',['nation_key','name','region_key','comment_col']);  
+  //   await check('nation.dict.parquet',['nation_key','name','region_key','comment_col']);
   // });
 
   it('nation.impala.parquet loads', async function () {

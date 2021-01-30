@@ -1,11 +1,12 @@
 'use strict';
+/* global __dirname */
 const chai = require('chai');
 const assert = chai.assert;
 const parquet = require('../parquet.js');
 const path = require('path');
 
-describe('dictionary encoding', async function () {
-  it('should read uncompressed dictionary from spark', async function () {
+describe('dictionary encoding', async function() {
+  it('should read uncompressed dictionary from spark', async function() {
     let reader = await parquet.ParquetReader.openFile(path.resolve(__dirname, 'test-files/spark-uncompressed-dict.parquet'));
     let cursor = reader.getCursor();
     let records = [];

@@ -1,4 +1,5 @@
 'use strict';
+/* eslint-disable no-console */
 const parquet = require('..');
 
 process.on('unhandledRejection', r => console.error(r));
@@ -53,7 +54,7 @@ async function example() {
   {
     let cursor = reader.getCursor();
     let record = null;
-    while (record = await cursor.next()) {
+    while (record = await cursor.next()) { //eslint-disable-line no-cond-assign
       console.log(record);
     }
   }
@@ -61,7 +62,7 @@ async function example() {
   {
     let cursor = reader.getCursor([['name'], ['stock', 'warehouse']]);
     let record = null;
-    while (record = await cursor.next()) {
+    while (record = await cursor.next()) { //eslint-disable-line no-cond-assign
       console.log(record);
     }
   }
