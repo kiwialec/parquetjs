@@ -1,7 +1,7 @@
 node_modules
 *.parquet
 npm-debug.log
-package-lock.json
+#package-lock.json
 .nyc_output
 yarn.lock
 
